@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Form, Message, Button} from 'semantic-ui-react';
-import {isEmail, isEmpty} from 'validator';
+import React, { Component } from 'react';
+import { Form, Message, Button } from 'semantic-ui-react';
+import { isEmail, isEmpty } from 'validator';
 import PropTypes from 'prop-types';
 import InlineMessage from '../messages/InlineMessage';
 
-export class LoginForm extends Component {
+class LoginForm extends Component {
 	static propTypes = {
 		submit: PropTypes.func.isRequired,
 	};
@@ -20,13 +20,13 @@ export class LoginForm extends Component {
 
 	onChange = e =>
 		this.setState({
-			data: {...this.state.data, [e.target.name]: e.target.value},
+			data: { ...this.state.data, [e.target.name]: e.target.value },
 		});
 
 	onSubmit = () => {
-		const {data} = this.state;
+		const { data } = this.state;
 		const errors = this.validate(this.state.data);
-		this.setState({errors});
+		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
 			this.props.submit(data);
 		}
@@ -34,14 +34,14 @@ export class LoginForm extends Component {
 
 	validate = data => {
 		const errors = {};
-		const {email, password} = data;
+		const { email, password } = data;
 		if (isEmpty(email)) errors.email = 'The email address cannot be blank';
 		else if (!isEmail(email)) errors.email = 'The email address is not valid';
 		if (isEmpty(password)) errors.password = 'The password cannot be blank';
 		return errors;
 	};
 	render() {
-		const {data, errors, loading} = this.state;
+		const { data, errors, loading } = this.state;
 
 		return (
 			<div>
