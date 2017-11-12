@@ -24,11 +24,17 @@ class LoginForm extends Component {
 		});
 
 	onSubmit = () => {
+		if (this.state.loading) return;
 		const { data } = this.state;
 		const errors = this.validate(this.state.data);
 		this.setState({ errors });
 		if (Object.keys(errors).length === 0) {
-			this.props.submit(data);
+			this.setState({ loading: true });
+			this.props
+				.submit(data)
+				.catch(err =>
+					this.setState({ errors: err.response.data.errors, loading: false }),
+				);
 		}
 	};
 
@@ -45,6 +51,12 @@ class LoginForm extends Component {
 
 		return (
 			<div>
+				{!!errors.global && (
+					<Message negative>
+						<Message.Header>Something went wrong</Message.Header>
+						<p>{errors.global}</p>
+					</Message>
+				)}
 				<Form noValidate onSubmit={this.onSubmit}>
 					<Form.Field error={!!errors.email}>
 						<label htmlFor="email">Email address</label>

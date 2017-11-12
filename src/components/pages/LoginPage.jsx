@@ -12,9 +12,8 @@ class LoginPage extends Component {
 		}).isRequired,
 	};
 
-	submit = data => {
+	submit = data =>
 		this.props.login(data).then(() => this.props.history.push('/'));
-	};
 
 	render() {
 		return (
