@@ -6,8 +6,7 @@ export default (state = {}, action = {}) => {
 			return action.payload;
 
 		case USER_LOGGED_OUT:
-			return action.payload;
-
+			return {};
 		default:
 			return state;
 	}
