@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import decode from 'jwt-decode';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { userLoggedIn } from './actions/auth';
@@ -17,7 +18,8 @@ const store = createStore(
 );
 
 if (localStorage.bookwormJWT) {
-	const user = { token: localStorage.bookwormJWT };
+	const { email, confirmed } = decode(localStorage.bookwormJWT);
+	const user = { token: localStorage.bookwormJWT, email, confirmed };
 	store.dispatch(userLoggedIn(user));
 }
 
