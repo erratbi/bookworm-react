@@ -10,5 +10,7 @@ export default {
 			axios.post('/api/users', { credentials }).then(res => res.data.user),
 		confirm: token =>
 			axios.post('/api/auth/confirm', { token }).then(res => res.data.user),
+		resetPasswordRequest: email =>
+			axios.post('/api/auth/reset_password', { email }),
 	},
 };
