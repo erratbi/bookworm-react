@@ -27,5 +27,10 @@ export const confirm = token => dispatch =>
 		return dispatch(userLoggedIn(user));
 	});
 
-export const resetPasswordRequset = ({ email }) => () =>
-	api.user.resetPasswordRequset(email);
+export const resetPasswordRequest = email => () => api.user.resetPasswordRequest(email);
+
+export const resendEmail = email => () => api.user.resetPasswordRequest(email);
+
+export const verifyToken = token => () => api.user.verifyToken(token);
+
+export const resetPassword = data => () => api.user.resetPassword(data);

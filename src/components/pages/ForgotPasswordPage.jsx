@@ -15,11 +15,7 @@ class ForgotPasswordPage extends React.Component {
 		success: false,
 	};
 
-	submit = ({ email }) => {
-		this.props
-			.resetPasswordRequest(email)
-			.then(() => this.setState({ success: true }));
-	};
+	submit = ({ email }) => this.props.resetPasswordRequest(email).then(() => this.setState({ success: true }));
 
 	render() {
 		return (
@@ -28,9 +24,7 @@ class ForgotPasswordPage extends React.Component {
 					<Message icon success>
 						<Icon name="checkmark" />
 						<Message.Content>
-							<Message.Header>
-								Email has been sent, check your inbox
-							</Message.Header>
+							<Message.Header>Email has been sent, check your inbox</Message.Header>
 							<p>
 								<Button onClick={this.props.resendEmail}>Resend email</Button>
 							</p>
@@ -49,6 +43,4 @@ class ForgotPasswordPage extends React.Component {
 
 ForgotPasswordPage.propTypes = {};
 
-export default connect(null, { resetPasswordRequest, resendEmail })(
-	ForgotPasswordPage,
-);
+export default connect(null, { resetPasswordRequest, resendEmail })(ForgotPasswordPage);
