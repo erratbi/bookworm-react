@@ -11,4 +11,7 @@ export default {
 		verifyToken: token => axios.post('/api/auth/verify_token', { token }),
 		resetPassword: data => axios.post('/api/auth/reset_password', { data }),
 	},
+	book: {
+		fetch: query => axios.get(`/api/books/search/${query}`).then(res => res.data.books),
+	},
 };
